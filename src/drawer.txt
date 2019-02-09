@@ -1,0 +1,104 @@
+/*import React from 'react';
+
+import UserDrawer from './user/userDrawer';
+import LeftDrawer from './guest/leftDrawer';
+
+export default function Drawer(props){
+    return props.hasAuth ? <UserDrawer />: (
+    <LeftDrawer 
+        left={props.left} 
+        onClose={props.onClose} 
+        onOpen={props.onOpen} 
+        onDrawerClick={props.onDrawerClick} 
+        onDrawerKeyDown={props.onDrawerKeyDown} />
+        );
+}*/
+
+import React from 'react';
+import PropTypes from 'prop-types';
+import { withStyles } from '@material-ui/core/styles';
+import SwipeableDrawer from '@material-ui/core/SwipeableDrawer';
+//import Icon from '@material-ui/core/Icon';
+import List from '@material-ui/core/List';
+import Divider from '@material-ui/core/Divider';
+import ListItem from '@material-ui/core/ListItem';
+import ListItemIcon from '@material-ui/core/ListItemIcon';
+import ListItemText from '@material-ui/core/ListItemText';
+//import CogIcon from '@material-ui/icons/Cog';
+//import MailIcon from '@material-ui/icons/Mail';
+
+const styles = {
+  list: {
+    width: 250,
+  },
+  fullList: {
+    width: 'auto',
+  },
+};
+
+class Drawer extends React.Component {
+
+  render() {
+    const { classes } = this.props;
+    const { open } = this.state;
+
+    
+
+    const sideList = (
+      <div className={classes.list}>
+        { profileSection }
+        <Divider />
+        <List>
+            <ListItem>
+              <ListItemIcon><i class="fa fa-home"></i> </ListItemIcon>
+              <ListItemText>Home</ListItemText>
+            </ListItem>
+        </List>
+        <Divider />
+        <List>
+            <ListItem>
+              <ListItemIcon><i class="fa fa-music"></i> </ListItemIcon>
+              <ListItemText>Songs</ListItemText>
+            </ListItem>
+            <ListItem>
+              <ListItemIcon><i class="fa fa-users"></i> </ListItemIcon>
+              <ListItemText>Artists</ListItemText>
+            </ListItem>
+            <ListItem>
+              <ListItemIcon><i class="fa fa-box"></i> </ListItemIcon>
+              <ListItemText>Albulms</ListItemText>
+            </ListItem>
+        </List>
+        <List>
+            <ListItem>
+              <ListItemIcon><i class="fa fa-cogs"></i></ListItemIcon>
+              <ListItemText>Settings</ListItemText>
+            </ListItem>
+        </List>
+      </div>
+    );
+
+    return (
+      <div>
+        <SwipeableDrawer
+          open={this.props.left}
+          onClose={this.props.onClose} 
+          onOpen={this.props.onOpen}
+        >
+          <div
+            onClick={this.props.onDrawerClick}
+            onKeyDown={this.props.onDrawerKeyDown}
+          >
+            {sideList}
+          </div>
+        </SwipeableDrawer>
+      </div>
+    );
+  }
+}
+
+Drawer.propTypes = {
+  classes: PropTypes.object.isRequired,
+};
+
+export default withStyles(styles)(Drawer);

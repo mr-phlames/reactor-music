@@ -1,0 +1,68 @@
+//dependency imports
+import React from "react";
+
+//component imports
+import Nav from "./components/nav";
+import Footer from "./components/footer";
+import LeftSideDrawer from "./components/drawer"
+
+//route lists
+import { Route, Switch } from 'react-router-dom';
+
+//page imports
+import Home from './pages/home'
+import Login from './pages/login'
+import Register from './pages/register'
+
+class Layout extends React.Component {
+    constructor(props) {
+        super(props);
+        this.state={
+            userHasAuth: true,
+            open: false
+        }
+    }
+
+    handleDrawerOpen = () => {
+        this.setState({
+            open: true
+        });
+    };
+
+    handleDrawerClose = () => {
+        this.setState({
+            open: false
+        });
+    };
+
+    render() {
+        return (
+            <React.Fragment>
+                <Nav hasAuth={this.state.userHasAuth} onToggleDrawer={this.toggleDrawer(true)} />
+                    <Switch>
+                        <Route exact path={'/'} component={Home} />
+                        <Route path={'/home'} component={Home} />
+
+                        <Route path={'/login'} component={Login} />
+                        <Route path={'/register'} component={Register} />
+
+                        {/*<Route path={'/songs'} component={Songs} />
+                        <Route path={'/artists'} component={Artists} />
+                        <Route path={'/albulms'} component={Albulms} />*/}
+                    </Switch>
+                <Footer hasAuth={this.state.userHasAuth} />
+
+                <LeftSideDrawer 
+                    onToggleDrawer={this.toggleDrawer} 
+                    left={this.state.left} 
+                    onClose={this.toggleDrawer(false)} 
+                    onOpen={this.toggleDrawer(true)} 
+                    onDrawerClick={this.toggleDrawer(true)} 
+                    onDrawerKeyDown={this.toggleDrawer(false)} />
+
+            </React.Fragment>
+        );
+    }
+}
+
+export default Layout;
