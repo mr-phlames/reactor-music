@@ -126,7 +126,7 @@ const styles = theme => ({
 class Layout extends React.Component {
   state = {
     open: false,
-    hasAuth: true
+    hasAuth: false
   };
 
   handleDrawerOpen = () => {
